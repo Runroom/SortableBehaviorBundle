@@ -1,40 +1,39 @@
 <?php
+
+declare(strict_types=1);
+
 /*
- * This file is part of the pixSortableBehaviorBundle.
+ * This file is part of the SortableBehaviorBundle.
  *
- * (c) Nicolas Ricci <nicolas.ricci@gmail.com>
+ * (c) Runroom <runroom@runroom.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Pix\SortableBehaviorBundle\Services;
+namespace Runroom\SortableBehaviorBundle\Services;
 
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
-class PositionODMHandler extends PositionHandler
+class ODMPositionHandler extends AbstractPositionHandler
 {
-    /**
-     * DocumentManager
-     */
-    protected $dm;
+    protected $documentManager;
 
     public function __construct(DocumentManager $documentManager)
     {
-        $this->dm = $documentManager;
+        $this->documentManager = $documentManager;
     }
 
-    public function getLastPosition($entity)
+    public function getLastPosition($entity): int
     {
         $entityClass = ClassUtils::getClass($entity);
         $parentEntityClass = true;
-        while ($parentEntityClass)
-        {
+        while ($parentEntityClass) {
             $parentEntityClass = ClassUtils::getParentClass($entityClass);
             if ($parentEntityClass) {
                 $reflection = new \ReflectionClass($parentEntityClass);
-                if($reflection->isAbstract()) {
+                if ($reflection->isAbstract()) {
                     break;
                 }
                 $entityClass = $parentEntityClass;
@@ -42,7 +41,7 @@ class PositionODMHandler extends PositionHandler
         }
 
         $positionFields = $this->getPositionFieldByEntity($entityClass);
-        $result = $this->dm
+        $result = $this->documentManager
             ->createQueryBuilder($entityClass)
             ->hydrate(false)
             ->select($positionFields)
@@ -51,7 +50,7 @@ class PositionODMHandler extends PositionHandler
             ->getQuery()
             ->getSingleResult();
 
-        if (is_array($result) && isset($result[$positionFields])) {
+        if (\is_array($result) && isset($result[$positionFields])) {
             return $result[$positionFields];
         }
 

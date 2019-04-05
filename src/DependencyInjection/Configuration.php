@@ -1,50 +1,41 @@
 <?php
+
+declare(strict_types=1);
+
 /*
- * This file is part of the pixSortableBehaviorBundle.
+ * This file is part of the SortableBehaviorBundle.
  *
- * (c) Nicolas Ricci <nicolas.ricci@gmail.com>
+ * (c) Runroom <runroom@runroom.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Pix\SortableBehaviorBundle\DependencyInjection;
+namespace Runroom\SortableBehaviorBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * This is the class that validates and merges configuration from your app/config files
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
- */
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * {@inheritDoc}
-     */
     public function getConfigTreeBuilder()
     {
-        $supportedDrivers = array('orm', 'mongodb');
+        $treeBuilder = new TreeBuilder('sortable_behavior');
 
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('pix_sortable_behavior');
+        // Keep compatibility with symfony/config < 4.2
+        if (!method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->root('sortable_behavior');
+        } else {
+            $rootNode = $treeBuilder->getRootNode();
+        }
 
         $rootNode
             ->children()
-            ->scalarNode('db_driver')
-                ->info(sprintf(
-                    'These following drivers are supported: %s',
-                    implode(', ', $supportedDrivers)
-                ))
-                ->validate()
-                    ->ifNotInArray($supportedDrivers)
-                    ->thenInvalid('The driver "%s" is not supported. Please choose one of ('.implode(', ', $supportedDrivers).')')
-                ->end()
-                ->cannotBeOverwritten()
-                ->cannotBeEmpty()
-                ->defaultValue('orm')
+
+            ->scalarNode('position_handler')
+                ->defaultValue('sortable_behavior.position.gedmo')
             ->end()
+
             ->arrayNode('position_field')
                 ->addDefaultsIfNotSet()
                 ->children()
@@ -66,9 +57,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-
-        ;
+            ->end();
 
         return $treeBuilder;
     }

@@ -1,14 +1,8 @@
-CHANGELOG
-=========
+# Change Log
+All notable changes to this project will be documented in this file.
+This project adheres to [Semantic Versioning](http://semver.org/).
 
-A [BC BREAK] means the update will break the project for many reasons:
-
-* new mandatory configuration
-* new dependencies
-* class refactoring
-* renaming
-
-### 0.2-dev
-
-* [BC BREAK] use translatable keys instead of plain text
-* [BC BREAK] change file extensions from `*.xlf` to `*.xliff`
+## [1.0] - 2019-04-05
+### Added
+- Compatibility with custom position handlers
+- GedmoPositionHandler

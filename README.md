@@ -1,7 +1,7 @@
-pixSortableBehaviorBundle
+SortableBehaviorBundle
 =========================
 
-Offers a sortable feature for your Symfony2 admin listing
+Offers a sortable feature for your Symfony admin listing
 
 ### SonataAdminBundle implementation
 
@@ -11,14 +11,14 @@ https://github.com/sonata-project/SonataAdminBundle/blob/3.x/docs/cookbook/recip
 
 ### Configuration
 
-By default, this extension works with Doctrine ORM, but you can choose to use Doctrine MongoDB by defining the driver configuration : 
+By default, this extension works with [Gedmo DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions), but you can change the position handler or implement your own (There are three implementations: Gedmo, ORM, and ODM): 
 
 ``` yaml
 # app/config/config.yml
-pix_sortable_behavior:
-    db_driver: mongodb # default value : orm
+sortable_behavior:
+    position_handler: sortable_behavior.position.orm
     position_field:
-        default: sort #default value : position
+        default: sort # default value: position
         entities:
             AppBundle\Entity\Foobar: order
             AppBundle\Entity\Baz: rang
