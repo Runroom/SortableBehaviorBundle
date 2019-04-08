@@ -54,20 +54,20 @@ var DraggableTable = function(element) {
             var moved = $(ui.item).find('.js-sortable-move');
             var newPosition = moved.attr('data-current-position');
 
-            $document.trigger('pixSortableBehaviorBundle.update', [event, ui]);
-            
+            $document.trigger('SortableBehaviorBundle.update', [event, ui]);
+
             $.ajax({
                 'type': 'GET',
                 'url': moved.attr('data-url').replace('NEW_POSITION', newPosition),
                 'dataType': 'json',
                 'error': function(data) {
-                    $document.trigger('pixSortableBehaviorBundle.error', [data]);
+                    $document.trigger('SortableBehaviorBundle.error', [data]);
                 },
                 'success': function(data) {
-                    $document.trigger('pixSortableBehaviorBundle.success', [data]);
+                    $document.trigger('SortableBehaviorBundle.success', [data]);
                 },
                 'complete': function() {
-                    $document.trigger('pixSortableBehaviorBundle.complete');
+                    $document.trigger('SortableBehaviorBundle.complete');
                 }
             });
         }
