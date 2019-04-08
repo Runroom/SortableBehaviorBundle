@@ -3,7 +3,7 @@ services:
         class: Runroom\SortableBehaviorBundle\Services\ORMPositionHandler
         public: false
         arguments:
-            entityManager: '@doctrine.orm.entity_manager'
+            $entityManager: '@doctrine.orm.entity_manager'
         calls:
             - ['setPositionField', ['%sortable.behavior.position.field%']]
             - ['setSortableGroups', ['%sortable.behavior.sortable_groups%']]
@@ -12,7 +12,7 @@ services:
         class: Runroom\SortableBehaviorBundle\Services\ODMPositionHandler
         public: false
         arguments:
-            entityManager: '@doctrine_mongodb.odm.document_manager'
+            $entityManager: '@doctrine_mongodb.odm.document_manager'
         calls:
             - ['setPositionField', ['%sortable.behavior.position.field%']]
 
@@ -20,13 +20,13 @@ services:
         class: Runroom\SortableBehaviorBundle\Service\GedmoPositionHandler
         public: false
         arguments:
-            entityManager: '@doctrine.orm.entity_manager'
-            listener: '@stof_doctrine_extensions.listener.sortable'
+            $entityManager: '@doctrine.orm.entity_manager'
+            $listener: '@stof_doctrine_extensions.listener.sortable'
 
     sortable_behavior.twig.extension:
         class: Runroom\SortableBehaviorBundle\Twig\ObjectPositionExtension
         public: false
         arguments:
-            positionHandler: '@sortable_behavior.position'
+            $positionHandler: '@sortable_behavior.position'
         tags:
             - { name: twig.extension }
