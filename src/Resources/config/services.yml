@@ -17,7 +17,7 @@ services:
             - ['setPositionField', ['%sortable.behavior.position.field%']]
 
     sortable_behavior.position.gedmo:
-        class: Runroom\SortableBehaviorBundle\Service\GedmoPositionHandler
+        class: Runroom\SortableBehaviorBundle\Services\GedmoPositionHandler
         public: false
         arguments:
             - '@doctrine.orm.entity_manager'
