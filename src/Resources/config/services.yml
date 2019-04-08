@@ -1,6 +1,6 @@
 services:
-    sortable_behavior.controller.sortable_admin:
-        class: Runroom\SortableBehaviorBundle\Controller\SortableAdminController
+    Runroom\SortableBehaviorBundle\Controller\SortableAdminController:
+        public: true
         arguments:
             - '@translator'
             - '@property_accessor'
