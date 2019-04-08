@@ -63,7 +63,7 @@ In order to use a draggable list instead of up/down buttons, change the template
                 'actions' => array(
                     'move' => array(
                         'template' => 'SortableBehaviorBundle:sort_drag_drop.html.twig',
-                        'enable_top_bottom_buttons' => true, //optional
+                        'enable_top_bottom_buttons' => true, // optional
                     ),
                 ),
             ))
@@ -84,24 +84,3 @@ In case you need it, this plugin fires to jQuery events when dragging is done on
 SortableBehaviorBundle.success
 SortableBehaviorBundle.error
 ```
-#### Disable top and bottom buttons
-```php
-<?php
-
-    // ClientAdmin.php
-    protected function configureListFields(ListMapper $listMapper)
-    {
-        $listMapper
-            ->addIdentifier('name')
-            ->add('enabled')
-            ->add('_action', null, array(
-                'actions' => array(
-                    'move' => array(
-                        'template' => 'SortableBehaviorBundle:sort_drag_drop.html.twig',
-                        'enable_top_bottom_buttons' => true,
-                    ),
-                ),
-            ))
-        ;
-    }
-```    
