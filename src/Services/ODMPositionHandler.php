@@ -16,7 +16,7 @@ namespace Runroom\SortableBehaviorBundle\Services;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
-class ODMPositionHandler extends AbstractPositionHandler
+final class ODMPositionHandler extends AbstractPositionHandler
 {
     protected $documentManager;
 

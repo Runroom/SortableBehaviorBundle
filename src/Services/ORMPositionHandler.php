@@ -16,7 +16,7 @@ namespace Runroom\SortableBehaviorBundle\Services;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 
-class ORMPositionHandler extends AbstractPositionHandler
+final class ORMPositionHandler extends AbstractPositionHandler
 {
     protected $entityManager;
     private static $cacheLastPosition = [];

@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class SortableAdminController extends CRUDController
+final class SortableAdminController extends CRUDController
 {
     private $translator;
     private $positionHandler;

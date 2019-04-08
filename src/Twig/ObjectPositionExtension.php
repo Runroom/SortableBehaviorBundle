@@ -17,7 +17,7 @@ use Runroom\SortableBehaviorBundle\Services\AbstractPositionHandler;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class ObjectPositionExtension extends AbstractExtension
+final class ObjectPositionExtension extends AbstractExtension
 {
     public const NAME = 'sortableObjectPosition';
 

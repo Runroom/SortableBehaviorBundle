@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Sortable\SortableListener;
 
-class GedmoPositionHandler extends AbstractPositionHandler
+final class GedmoPositionHandler extends AbstractPositionHandler
 {
     protected $maxPositions;
     protected $entityManager;
