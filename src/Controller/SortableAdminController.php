@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Runroom\SortableBehaviorBundle\Controller;
 
-use Runroom\SortableBehaviorBundle\Services\PositionHandler;
+use Runroom\SortableBehaviorBundle\Services\AbstractPositionHandler;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\Translation\TranslatorInterface;
 
 final class SortableAdminController extends CRUDController
 {
@@ -28,7 +29,7 @@ final class SortableAdminController extends CRUDController
     public function __construct(
         TranslatorInterface $translator,
         PropertyAccessor $accessor,
-        PositionHandler $positionHandler
+        AbstractPositionHandler $positionHandler
     ) {
         $this->translator = $translator;
         $this->accessor = $accessor;
