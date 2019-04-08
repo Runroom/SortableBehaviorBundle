@@ -15,6 +15,7 @@ namespace Runroom\SortableBehaviorBundle\Twig;
 
 use Runroom\SortableBehaviorBundle\Services\AbstractPositionHandler;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 class ObjectPositionExtension extends AbstractExtension
 {
