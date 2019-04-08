@@ -1,4 +1,11 @@
 services:
+    sortable_behavior.controller.sortable_admin:
+        class: Runroom\SortableBehaviorBundle\Controller\SortableAdminController
+        arguments:
+            - '@translator'
+            - '@property_accessor'
+            - '@sortable_behavior.position'
+
     sortable_behavior.position.orm:
         class: Runroom\SortableBehaviorBundle\Services\ORMPositionHandler
         public: false

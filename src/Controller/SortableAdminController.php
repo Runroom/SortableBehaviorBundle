@@ -17,18 +17,21 @@ use Runroom\SortableBehaviorBundle\Services\PositionHandler;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 final class SortableAdminController extends CRUDController
 {
     private $translator;
+    private $accessor;
     private $positionHandler;
 
     public function __construct(
         TranslatorInterface $translator,
+        PropertyAccessor $accessor,
         PositionHandler $positionHandler
     ) {
         $this->translator = $translator;
+        $this->accessor = $accessor;
         $this->positionHandler = $positionHandler;
     }
 
@@ -51,8 +54,7 @@ final class SortableAdminController extends CRUDController
         $lastPositionNumber = $this->positionHandler->getLastPosition($object);
         $newPositionNumber = $this->positionHandler->getPosition($object, $position, $lastPositionNumber);
 
-        $accessor = PropertyAccess::createPropertyAccessor();
-        $accessor->setValue($object, $this->positionHandler->getPositionFieldByEntity($object), $newPositionNumber);
+        $this->accessor->setValue($object, $this->positionHandler->getPositionFieldByEntity($object), $newPositionNumber);
 
         $this->admin->update($object);
 
