@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Translation\TranslatorInterface;
 
-final class SortableAdminController extends CRUDController
+class SortableAdminController extends CRUDController
 {
     private $translator;
     private $accessor;
@@ -36,7 +36,7 @@ final class SortableAdminController extends CRUDController
         $this->positionHandler = $positionHandler;
     }
 
-    public function moveAction(string $position): Response
+    final public function moveAction(string $position): Response
     {
         if (!$this->admin->isGranted('EDIT')) {
             $this->addFlash(
