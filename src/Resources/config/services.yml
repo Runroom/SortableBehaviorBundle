@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: false
+
     Runroom\SortableBehaviorBundle\Controller\SortableAdminController:
         public: true
         arguments:
@@ -6,34 +9,34 @@ services:
             - '@property_accessor'
             - '@sortable_behavior.position'
 
-    sortable_behavior.position.orm:
-        class: Runroom\SortableBehaviorBundle\Services\ORMPositionHandler
-        public: false
-        arguments:
-            - '@doctrine.orm.entity_manager'
-        calls:
-            - ['setPositionField', ['%sortable.behavior.position.field%']]
-            - ['setSortableGroups', ['%sortable.behavior.sortable_groups%']]
-
-    sortable_behavior.position.odm:
-        class: Runroom\SortableBehaviorBundle\Services\ODMPositionHandler
-        public: false
-        arguments:
-            - '@doctrine_mongodb.odm.document_manager'
-        calls:
-            - ['setPositionField', ['%sortable.behavior.position.field%']]
-
-    sortable_behavior.position.gedmo:
-        class: Runroom\SortableBehaviorBundle\Services\GedmoPositionHandler
-        public: false
-        arguments:
-            - '@doctrine.orm.entity_manager'
-            - '@stof_doctrine_extensions.listener.sortable'
-
-    sortable_behavior.twig.extension:
-        class: Runroom\SortableBehaviorBundle\Twig\ObjectPositionExtension
-        public: false
+    Runroom\SortableBehaviorBundle\Twig\ObjectPositionExtension:
         arguments:
             - '@sortable_behavior.position'
         tags:
             - { name: twig.extension }
+
+    sortable_behavior.position.orm:
+        class: Runroom\SortableBehaviorBundle\Services\ORMPositionHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        calls:
+            - [setPositionField, ['%sortable.behavior.position.field%']]
+            - [setSortableGroups, ['%sortable.behavior.sortable_groups%']]
+
+    sortable_behavior.position.odm:
+        class: Runroom\SortableBehaviorBundle\Services\ODMPositionHandler
+        arguments:
+            - '@doctrine_mongodb.odm.document_manager'
+        calls:
+            - [setPositionField, ['%sortable.behavior.position.field%']]
+
+    sortable_behavior.position.gedmo.listener:
+        class: Gedmo\Sortable\SortableListener
+        calls:
+            - [setAnnotationReader, ['@annotation_reader']]
+
+    sortable_behavior.position.gedmo:
+        class: Runroom\SortableBehaviorBundle\Services\GedmoPositionHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@sortable_behavior.position.gedmo.listener'
