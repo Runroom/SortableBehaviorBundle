@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.2.0](https://github.com/Runroom/SortableBehaviorBundle/compare/1.1.0...1.2.0) - 2020-02-04
+## [1.2.0](https://github.com/Runroom/SortableBehaviorBundle/compare/1.1.0...1.2.0) - 2020-02-24
 ### Removed
 - Removed dependency with Stof Extensions Bundle
 
